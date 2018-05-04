@@ -67,20 +67,7 @@ router.put('/:id', (req,res)=>{
     db
     .update(id, update)
     .then(count =>{
-
-        if(count > 0){
-            db
-            .get(id)
-            .then(actions =>{
-            
-                res
-                .status(200)
-                .json(actions[0]);
-            })
-        } else{
-            res.status(400)
-            .json({message:"this post does not exist"})
-        }
+    res.json(update)
     })
     .catch(err=>{
         res.status(400).json({error: "There was an error while saving the post to the database"});
