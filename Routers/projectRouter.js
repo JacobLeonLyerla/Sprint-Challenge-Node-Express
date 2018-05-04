@@ -76,7 +76,18 @@ router.put('/:id', (req,res)=>{
     });
 });
 
-
+// router.get('/:id/actions', (req,res)=>{
+//     db
+//     .getProjectActions(req.param.id)
+//     .then(actions =>{
+//         res.json(actions)
+//     })
+// })
+router.get('/:id/actions',(req,res)=>{
+    db.getProjectActions(req.params.id).then(actions =>{
+         res.json(actions)
+        })
+})
 
 
 module.exports = router
