@@ -48,3 +48,13 @@
 
   height:30px;
 }
+.modal-title{
+  display:flex;
+  justify-content: center;
+  font-weight: bold;
+  margin-left:50px
+}
+.modal-footer{
+  display:flex;
+  justify-content: center;
+}

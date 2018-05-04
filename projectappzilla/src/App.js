@@ -25,13 +25,23 @@ updateState = () =>{
     console.log(err)
   })
 }
+delete = id =>{
+  axios
+  .delete(`http://localhost:5000/projects/${id}`)
+  .then(response =>{
+      this.updateState();
+  })
+  .catch(err =>{
+      console.log(err);
+  });
+};
 
 
   render() {
     console.log(this.state.projects)
     return (
       <div className="App">
-    <ProjectList projects={this.state.projects} updateState={this.updateState}/>
+    <ProjectList projects={this.state.projects} updateState={this.updateState} delete={this.delete}/>
       </div>
     );
   }

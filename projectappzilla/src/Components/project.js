@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Card, CardText, CardBody,
-    CardTitle, CardSubtitle, Button,Label,FormGroup,Input, Col,Row } from 'reactstrap';
+    CardTitle, CardSubtitle, Button,Label,FormGroup,Input, Col,Row, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 
 class Post extends Component{
-    state={
+    constructor(props){
+        super(props);
+        this.state={
+         modal:false,   
         name:'',
-        description:''
+        description:'',
+        
   
     }
+    this.toggle = this.toggle.bind(this);
+}
     updateProject = id => {
         const project = {};
         if (this.state.name !== '') {
@@ -31,7 +37,11 @@ class Post extends Component{
       };
 
 
-
+      toggle() {
+        this.setState({
+          modal: !this.state.modal
+        });
+      }
 
     setInput = (element)=>{
         this.setState({[element.target.name]: element.target.value})
@@ -73,10 +83,23 @@ render(){
         </FormGroup>
      <Row>
          <Col xs="6">
-          <Button >Delete</Button>
+          <Button color="danger" onClick={this.toggle}>Delete</Button>
+          <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalHeader toggle={this.toggle}>Are you sure you wish to delete this?</ModalHeader>
+          <ModalFooter>
+              <Row>
+              <Col xs="6">
+            <Button color="danger" onClick={() => this.props.delete(this.props.id)}>Do Something</Button>
+            </Col>
+            <Col xs="6">
+            <Button color="primary" onClick={this.toggle}>Cancel</Button>
+            </Col>
+            </Row>
+          </ModalFooter>
+        </Modal>
           </Col>
           <Col xs="6">
-          <Button  onClick={() => this.updateProject(this.props.id)}>update</Button>
+          <Button color="success"  onClick={() => this.updateProject(this.props.id)}>update</Button>
           </Col>
     </Row>
         </CardBody>
