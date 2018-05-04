@@ -11,7 +11,12 @@ return(
 
 
 <div>
-<Project id={project.title} name={project.name} description={project.description} completed={project.completed}/>
+<Project id={project.id}
+ name={project.name}
+ description={project.description}
+  completed={project.completed}
+  updateState={props.updateState}
+  />
 </div>
 
 

@@ -6,10 +6,33 @@ import { Card, CardText, CardBody,
 
 class Post extends Component{
     state={
-        title:'',
-        contents:'',
-        answer:''
+        name:'',
+        description:''
+  
     }
+    updateProject = id => {
+        const project = {};
+        if (this.state.name !== '') {
+          project.name = this.state.name;
+        }
+         if (this.state.description !== '') {
+          project.description = this.state.description;
+        }
+        axios
+          .put(`http://localhost:5000/projects/${id}`, project)
+          .then(response => {
+              console.log(this.props)
+            this.setState({name: '', description: ''});
+            this.props.updateState();
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      };
+
+
+
+
     setInput = (element)=>{
         this.setState({[element.target.name]: element.target.value})
        }
@@ -25,36 +48,37 @@ render(){
           <FormGroup>
           <Label for="exampleText">{this.props.description}</Label>
           <Row>
-            <Col>
+            <Col xs="6">
           <Input  
           onChange={this.setInput}
-          type="textarea" 
-          name="answer" 
+          type="input" 
+          placeholder="name"
+          name="name" 
           id="exampleText"
           value={this.state.name}
            />
            </Col>
+           <Col xs="6">
                  <Input 
           onChange={this.setInput}
-          type="textarea" 
-          name="answer" 
+          type="input" 
+          placeholder="description"
+          name="description" 
           id="exampleText"
-          value={this.state.name}
+          value={this.state.description}
            />
-                 <Input 
-          onChange={this.setInput}
-          type="textarea" 
-          name="answer" 
-          id="exampleText"
-          value={this.state.name}
-           />
+      </Col>
+     
            </Row>
         </FormGroup>
-     <div className="btn-container">
-          <Button col-6>Delete</Button>
-     
-          <Button >update</Button>
-    </div>
+     <Row>
+         <Col xs="6">
+          <Button >Delete</Button>
+          </Col>
+          <Col xs="6">
+          <Button  onClick={() => this.updateProject(this.props.id)}>update</Button>
+          </Col>
+    </Row>
         </CardBody>
       </Card>
     </div>

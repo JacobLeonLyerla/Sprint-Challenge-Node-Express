@@ -1,14 +1,14 @@
 const express = require('express');
-
+const cors = require('cors');
 const actionRouter = require('./Routers/actionsRouter');
 const projectRouter = require('./Routers/projectRouter');
 
 const server = express();
 
 server.use(express.json());
+server.use(cors());
 server.use('/actions',actionRouter);
 server.use('/projects',projectRouter);
-
 server.get('/', (req, res)=>{
     res.send('api is running')
 })

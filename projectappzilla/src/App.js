@@ -31,7 +31,7 @@ updateState = () =>{
     console.log(this.state.projects)
     return (
       <div className="App">
-    <ProjectList projects={this.state.projects}/>
+    <ProjectList projects={this.state.projects} updateState={this.updateState}/>
       </div>
     );
   }
