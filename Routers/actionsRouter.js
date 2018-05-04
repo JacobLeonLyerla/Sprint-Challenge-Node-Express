@@ -42,16 +42,16 @@ router.post('/',(req,res)=>{
 
 router.delete('/:id', (req,res)=>{
     const { id } = req.params;
-    let post;
+    let action;
 
     db
     .get(id)
     .then(response =>{
-        post = { ...response[0] }
+        action = { ...response[0] }
         db
         .remove(id)
         .then(response =>{
-            res.status(200).json(post)
+            res.status(200).json(action)
         })
         
     })
@@ -70,7 +70,7 @@ router.put('/:id', (req,res)=>{
     res.json(update)
     })
     .catch(err=>{
-        res.status(400).json({error: "There was an error while saving the post to the database"});
+        res.status(400).json({error: "There was an error while saving the action to the database"});
     });
 });
 
